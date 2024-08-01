@@ -7,7 +7,8 @@ class CalcController{
         this._dateEl = document.querySelector("#data");
         this._timeEl = document.querySelector("#hora");
         this._currentDate;
-        this.initialize();
+        this.initialize();  
+        this.initButtonsEvents();
 
     }
 
@@ -23,7 +24,21 @@ class CalcController{
         
     }
 
-    serDisplayDateTime(){
+    initButtonsEvents(){
+    
+        let buttons = document.querySelectorAll("#buttons > g, #parts > g");
+    
+        buttons.forEach((btn, index)=>{
+
+            btn.addEventListener('click', e => {
+                console.log(btn.className.baseVal.replace("btn-",""));
+            });
+        })
+
+    }
+
+    setDisplayDateTime(){
+
         this.displayDate = this.currentDate.toLocaleDateString(this._locale,{
             day: "2-digit",
             month: "long",
@@ -58,7 +73,7 @@ class CalcController{
     }
 
     get currentDate(){
-        return this._currentDate;
+        return new Date();
     }
 
     set currentDate(valor){
